@@ -14,9 +14,9 @@ enum MovieDetaileEndpoint {
     var path: String {
         switch self {
         case .getDetail(let id):
-            NetworkingHelper.shared.configURL(endpoint: "/movie/\(id)")
+            NetworkingHelper.shared.configURL(endpoint: "movie/\(id)")
         case .getSimilar(movieId: let id):
-            NetworkingHelper.shared.configURL(endpoint: "/movie/\(id)/similar")
+            NetworkingHelper.shared.configURL(endpoint: "movie/\(id)/similar")
         }
     }
 }
