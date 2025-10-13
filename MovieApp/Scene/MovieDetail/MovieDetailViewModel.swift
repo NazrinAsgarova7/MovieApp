@@ -11,7 +11,7 @@ class MovieDetailViewModel {
     let manager = MovieDetailManager()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
-    var movieDetail: MovieDetail?
+    var movieDetail = MovieDetail()
     var similarMovies = [SimilarMovieResult]()
     var id: Int
     
@@ -20,7 +20,7 @@ class MovieDetailViewModel {
     }
     
     func getMovieDetail() {
-        manager.getMovieDetail(endpoint: .personId(id: String(id))) { data, error in
+        manager.getMovieDetail(endpoint: .getDetail(movieId: id)) { data, error in
             if let data {
                 self.movieDetail = data
                 self.success?()
@@ -31,7 +31,7 @@ class MovieDetailViewModel {
     }
     
     func getSimilarMovie() {
-        manager.getSimilarMovie(endpoint: .personId(id:  String(id))) { data, error in
+        manager.getSimilarMovie(endpoint: .getSimilar(movieId: id)) { data, error in
             if let data {
                 self.similarMovies = data.results ?? []
                 self.success?()

@@ -74,4 +74,9 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
         .init(width: 168, height: 270)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let controller = MovieDetailController(vm: MovieDetailViewModel(id: vm.movies[indexPath.row].id ?? 0))
+        show(controller, sender: nil)
+    }
 }

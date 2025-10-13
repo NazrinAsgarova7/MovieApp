@@ -8,11 +8,11 @@
 import Foundation
 
 class MovieDetailManager: MovieDetailUseCase {
-    func getMovieDetail(endpoint: MoviesOfActorEndpoint, completion: @escaping ((MovieDetail?, String?) -> Void)) {
+    func getMovieDetail(endpoint: MovieDetaileEndpoint, completion: @escaping ((MovieDetail?, String?) -> Void)) {
         NetworkingManager.shared.request(url: endpoint.path, model: MovieDetail.self, completion: completion)
     }
     
-    func getSimilarMovie(endpoint: MoviesOfActorEndpoint, completion: @escaping ((SimilarMovie?, String?) -> Void)) {
+    func getSimilarMovie(endpoint: MovieDetaileEndpoint, completion: @escaping ((SimilarMovie?, String?) -> Void)) {
         NetworkingManager.shared.request(url: endpoint.path, model: SimilarMovie.self, completion: completion)
     }
 }
