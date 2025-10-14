@@ -8,7 +8,7 @@
 import UIKit
 
 class MovieDetailCell: UITableViewCell {
-    lazy var movieImageView: UIImageView = {
+    private lazy var movieImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 16
         image.contentMode = .scaleAspectFill
@@ -17,7 +17,7 @@ class MovieDetailCell: UITableViewCell {
         return image
     }()
     
-    lazy var earthImageView: UIImageView = {
+    private lazy var earthImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "globe")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -25,14 +25,14 @@ class MovieDetailCell: UITableViewCell {
         return image
     }()
     
-    lazy var watchImageView: UIImageView = {
+    private lazy var watchImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "clock")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    lazy var starImageView: UIImageView = {
+    private lazy var starImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "star.fill")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +44,7 @@ class MovieDetailCell: UITableViewCell {
         let l = UILabel()
         l.textColor = .black
         l.font = .systemFont(ofSize: 20, weight: .medium)
+        l.numberOfLines = 0
         l.translatesAutoresizingMaskIntoConstraints = false
         return l
     }()
@@ -85,7 +86,7 @@ class MovieDetailCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 24)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -94,8 +95,8 @@ class MovieDetailCell: UITableViewCell {
         return cv
     }()
     
-    var similarMovies: [SimilarMovieResult]?
-  
+    private var similarMovies: [SimilarMovieResult]?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configConstraint()
@@ -104,8 +105,8 @@ class MovieDetailCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-   
-    func configConstraint() {
+    
+    private func configConstraint() {
         [movieImageView, earthImageView, watchImageView, starImageView, titleLabel, languageLabel, runtimeLabel, ratingLabel, overviewLabel, collectionView].forEach { item in
             contentView.addSubview(item)
         }
@@ -118,6 +119,7 @@ class MovieDetailCell: UITableViewCell {
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 24),
+            titleLabel.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
             
             languageLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             languageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
@@ -127,19 +129,18 @@ class MovieDetailCell: UITableViewCell {
             earthImageView.widthAnchor.constraint(equalToConstant: 24),
             earthImageView.heightAnchor.constraint(equalToConstant: 24),
             
-            runtimeLabel.leadingAnchor.constraint(equalTo: earthImageView.trailingAnchor, constant: 44),
             runtimeLabel.centerYAnchor.constraint(equalTo: earthImageView.centerYAnchor),
+            runtimeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
             watchImageView.leadingAnchor.constraint(equalTo: runtimeLabel.trailingAnchor, constant: 8),
             watchImageView.centerYAnchor.constraint(equalTo: earthImageView.centerYAnchor),
             watchImageView.widthAnchor.constraint(equalToConstant: 24),
             watchImageView.heightAnchor.constraint(equalToConstant: 24),
             
-            
-            ratingLabel.leadingAnchor.constraint(equalTo: watchImageView.trailingAnchor, constant: 44),
             ratingLabel.centerYAnchor.constraint(equalTo: watchImageView.centerYAnchor),
             
             starImageView.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 8),
+            starImageView.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
             starImageView.centerYAnchor.constraint(equalTo: earthImageView.centerYAnchor),
             starImageView.widthAnchor.constraint(equalToConstant: 24),
             starImageView.heightAnchor.constraint(equalToConstant: 24),
@@ -153,7 +154,7 @@ class MovieDetailCell: UITableViewCell {
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 270)
+            collectionView.heightAnchor.constraint(equalToConstant: 280)
             
             
         ])
@@ -165,7 +166,7 @@ class MovieDetailCell: UITableViewCell {
         titleLabel.text = movieDetail.belongsToCollection?.name
         languageLabel.text = movieDetail.spokenLanguages?[0].name
         runtimeLabel.text = String(movieDetail.runtime ?? 0) + "min"
-        ratingLabel.text = String(movieDetail.voteAverage ?? 0.0) + "/10"
+        ratingLabel.text = String(format: "%.1f", movieDetail.voteAverage ?? 0.0) + "/10"
         overviewLabel.text = movieDetail.overview
         self.similarMovies = similarMovies
         collectionView.reloadData()

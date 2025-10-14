@@ -24,6 +24,7 @@ class HomeController: BaseController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func configVM() {
@@ -56,7 +57,11 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as? HomeCell else { return UICollectionViewCell() }
         cell.config(homeModel: viewmodel.mainCellItems[indexPath.row])
         cell.callbackSeeAllButton = {
-            let controller = CategoryMoviesController(vm: CategoryMoviesViewModel(movies: self.viewmodel.mainCellItems[indexPath.row].movies))
+            let controller = CategoryMoviesController(vm: CategoryMoviesViewModel(categoryTitle:             self.viewmodel.mainCellItems[indexPath.row].title))
+            self.show(controller, sender: nil)
+        }
+        cell.calldidSelectButton = { id in
+            let controller = MovieDetailController(vm: MovieDetailViewModel(id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0))
             self.show(controller, sender: nil)
         }
         return cell

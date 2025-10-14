@@ -41,7 +41,8 @@ class HomeCell: UICollectionViewCell {
     
     var movies = [MovieResult]()
     var callbackSeeAllButton: (() -> Void)?
-    
+    var calldidSelectButton: ((Int) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configConstraint()
@@ -72,7 +73,6 @@ class HomeCell: UICollectionViewCell {
     
     @objc func buttonAction() {
         callbackSeeAllButton?()
-        print("Button pressed")
     }
     
     func config(homeModel: HomeModel) {
@@ -95,5 +95,10 @@ extension HomeCell: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: 168, height: collectionView.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        calldidSelectButton?(indexPath.row)
     }
 }

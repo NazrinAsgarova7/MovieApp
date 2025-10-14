@@ -11,6 +11,7 @@ class TabbarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let homevc = UINavigationController(rootViewController: HomeController())
         let actorvc = UINavigationController(rootViewController: ActorController())
 

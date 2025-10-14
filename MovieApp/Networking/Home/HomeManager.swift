@@ -29,36 +29,4 @@ class HomeManager: HomeUseCase {
             NetworkingManager.shared.request(url: endpoint.path, model: Movie.self, completion: completion)
         }
     }
-    
-  //  func getAllMovies() {
-//        getNowPlayingMovies { data, error in
-//            if let data {
-//                self.mainCellItems.append(.init(title: "Now Playing", movies: data.results ?? []))
-//            } else if let error {
-//                self.error?(error)
-//            }
-//        }
-//        getPopular { data, error in
-//            if let data {
-//                self.mainCellItems.append(.init(title: "Now Playing", movies: data.results ?? []))
-//            } else if let error {
-//                self.error?(error)
-//            }
-//        }
-//        getTopRated { data, error in
-//            if let data {
-//                self.mainCellItems.append(.init(title: "Now Playing", movies: data.results ?? []))
-//            } else if let error {
-//                self.error?(error)
-//            }
-//        }
-//        getUpComing { data, error in
-//            if let data {
-//                self.mainCellItems.append(.init(title: "Now Playing", movies: data.results ?? []))
-//            } else if let error {
-//                self.error?(error)
-//            }
-//        }
-//        successCompletion?(mainCellItems)
-//    }
 }

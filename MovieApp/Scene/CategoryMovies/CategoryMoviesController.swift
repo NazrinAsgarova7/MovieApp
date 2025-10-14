@@ -48,15 +48,14 @@ class CategoryMoviesController: BaseController {
         ])
     }
     
-//    override func configVM() {
-//        vm.getMoviesOfActor()
-//        vm.success = {
-//            self.collectionView.reloadData()
-//        }
-//        vm.error = { error in
-//            print(error)
-//        }
-//    }
+    override func configVM() {
+        vm.success = {
+            self.collectionView.reloadData()
+        }
+        vm.error = { error in
+            print(error)
+        }
+    }
 }
 
 extension CategoryMoviesController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

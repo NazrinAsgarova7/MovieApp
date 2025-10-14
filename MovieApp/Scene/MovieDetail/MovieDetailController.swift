@@ -9,7 +9,6 @@ import UIKit
 
 
 class MovieDetailController: BaseController {
-    
     private lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
@@ -37,10 +36,8 @@ class MovieDetailController: BaseController {
     }
     
     override func configConstraint() {
-        [tableView].forEach { item in
-            view.addSubview(item)
-        }
-        
+        view.addSubview(tableView)
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
