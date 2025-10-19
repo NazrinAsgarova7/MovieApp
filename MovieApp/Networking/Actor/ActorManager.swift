@@ -8,7 +8,7 @@
 import Foundation
 
 class ActorManager: ActorUseCase {
-    func getActors(completion: @escaping ((Actor?, String?) -> Void)) {
-        NetworkingManager.shared.request(url: ActorEndpoint.popularActor.path, model: Actor.self, completion: completion)
+    func getActors(page: Int, completion: @escaping ((Actor?, String?) -> Void)) {
+        NetworkingManager.shared.request(url: ActorEndpoint.popularActor(page: page).path, model: Actor.self, completion: completion)
     }
 }

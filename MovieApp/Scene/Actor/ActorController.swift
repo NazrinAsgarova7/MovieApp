@@ -22,7 +22,8 @@ class ActorController: BaseController {
         return cv
     }()
     
-    let vm = ActorViewModel()
+    private let vm = ActorViewModel()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,22 @@ class ActorController: BaseController {
         vm.getActors()
         vm.success = {
             self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
         }
         vm.error = { error in
             print(error)
         }
+    }
+    
+    override func configUI() {
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc private func pullToRefresh() {
+        vm.removeAllData()
+        collectionView.reloadData()
+        vm.getActors()
     }
 }
 
@@ -68,6 +81,11 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
+        navigationController?.config()
         show(controller, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        vm.pagination(index: indexPath.row)
     }
 }

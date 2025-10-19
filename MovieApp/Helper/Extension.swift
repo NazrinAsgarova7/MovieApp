@@ -14,3 +14,11 @@ extension UIImageView {
         self.kf.setImage(with: URL(string: image))
     }
 }
+
+extension UINavigationController {
+    func config() {
+        topViewController?.navigationItem.backButtonTitle = ""
+        topViewController?.navigationItem.backButtonDisplayMode = .minimal
+        navigationBar.tintColor = .black
+    }
+}
