@@ -12,13 +12,15 @@ final class MoviesOfActorViewModel {
     var success: (() -> Void)?
     var error: ((String) -> Void)?
     var items = [Cast]()
-    var id: Int?
+    var id: Int
+    var actorName: String
     
-    init(id: Int) {
+    init(id: Int, actorName: String) {
         self.id = id
+        self.actorName = actorName
     }
     func getMoviesOfActor() {
-        manager.getMoviesOfActors(endpoint: .personId(id: String(id ?? 0)), completion: { data, error in
+        manager.getMoviesOfActors(endpoint: .personId(id: String(id)), completion: { data, error in
             if let data {
                 self.items = data.cast ?? []
                 self.success?()

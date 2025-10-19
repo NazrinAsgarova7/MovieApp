@@ -13,7 +13,7 @@ class ActorController: BaseController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -22,8 +22,7 @@ class ActorController: BaseController {
         return cv
     }()
     
-    private let vm = ActorViewModel()
-    private let refreshControl = UIRefreshControl()
+    let vm = ActorViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +43,16 @@ class ActorController: BaseController {
         vm.getActors()
         vm.success = {
             self.collectionView.reloadData()
-            self.refreshControl.endRefreshing()
         }
         vm.error = { error in
             print(error)
         }
     }
+<<<<<<< Updated upstream
+=======
     
     override func configUI() {
+        self.title = "Actors"
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
@@ -61,6 +62,7 @@ class ActorController: BaseController {
         collectionView.reloadData()
         vm.getActors()
     }
+>>>>>>> Stashed changes
 }
 
 extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -80,12 +82,18 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+        let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0, actorName: vm.items[indexPath.row].titleLabel))
         navigationController?.config()
+>>>>>>> Stashed changes
         show(controller, sender: nil)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        vm.pagination(index: indexPath.row)
     }
 }

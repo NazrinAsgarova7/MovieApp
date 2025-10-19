@@ -30,7 +30,7 @@ class HomeCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self

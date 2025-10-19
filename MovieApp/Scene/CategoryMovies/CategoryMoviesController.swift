@@ -14,7 +14,7 @@ class CategoryMoviesController: BaseController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -22,6 +22,8 @@ class CategoryMoviesController: BaseController {
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
+    
+    private var refreshController = UIRefreshControl()
     
     let vm: CategoryMoviesViewModel
     
@@ -33,6 +35,7 @@ class CategoryMoviesController: BaseController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -49,12 +52,25 @@ class CategoryMoviesController: BaseController {
     }
     
     override func configVM() {
+        vm.getMovies()
         vm.success = {
+            self.refreshController.endRefreshing()
             self.collectionView.reloadData()
         }
         vm.error = { error in
             print(error)
         }
+    }
+    
+    override func configUI() {
+        collectionView.refreshControl = self.refreshController
+        refreshController.addTarget(self, action: #selector(refreshScreen), for: .valueChanged)
+    }
+    
+    @objc func  refreshScreen() {
+        vm.removeItems()
+        collectionView.reloadData()
+        vm.getMovies()
     }
 }
 
@@ -75,8 +91,29 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         let controller = MovieDetailController(vm: MovieDetailViewModel(id: vm.movies[indexPath.row].id ?? 0))
         navigationController?.config()
         show(controller, sender: nil)
+=======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+        let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: vm.movies[indexPath.row].id ?? 0)
+        coordinator.start()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        vm.pagination(index: indexPath.row)
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     }
 }

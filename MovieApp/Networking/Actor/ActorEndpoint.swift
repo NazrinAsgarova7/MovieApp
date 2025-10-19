@@ -7,13 +7,15 @@
 
 import Foundation
 
+<<<<<<< Updated upstream
+enum ActorEndpoint: String {
+    case popularActor = "/person/popular"
+    
+=======
 enum ActorEndpoint {
-  //  case popularActor = "/person/popular"
     case popularActor(page: Int)
+>>>>>>> Stashed changes
     var path: String {
-        switch self {
-        case .popularActor(let id):
-            NetworkingHelper.shared.configURL(endpoint: "/person/popular?page=\(id)")
-        }
+        NetworkingHelper.shared.configURL(endpoint: self.rawValue)
     }
 }

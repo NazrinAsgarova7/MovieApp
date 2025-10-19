@@ -8,44 +8,54 @@
 import Foundation
 
 class CategoryMoviesViewModel {
+    var movie: Movie?
     var movies = [MovieResult]()
-    private var manager = HomeManager()
+    private var manager = MoviesOfCategoryManager()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
+    private var categoryName: String
     
     init(categoryTitle: String) {
-        switch categoryTitle {
+        self.categoryName = categoryTitle
+    }
+    
+    func getMovies() {
+        switch categoryName {
         case "Popular":
-            manager.getPopular { data, error in
+            manager.getPopular(page: (movie?.page ?? 0) + 1) { data, error in
                 if let data {
-                    self.movies = data.results ?? []
+                    self.movie = data
+                    self.movies.append(contentsOf: data.results ?? [])
                     self.success?()
                 } else if let error {
                     self.error?(error)
                 }
             }
         case "Top Rating":
-            manager.getTopRated{ data, error in
+            manager.getTopRated(page: (movie?.page ?? 0) + 1){ data, error in
                 if let data {
-                    self.movies = data.results ?? []
+                    self.movie = data
+                    self.movies.append(contentsOf: data.results ?? [])
                     self.success?()
                 } else if let error {
                     self.error?(error)
                 }
             }
         case "Up Comping":
-            manager.getUpComing { data, error in
+            manager.getUpComing(page: (movie?.page ?? 0) + 1) { data, error in
                 if let data {
-                    self.movies = data.results ?? []
+                    self.movie = data
+                    self.movies.append(contentsOf: data.results ?? [])
                     self.success?()
                 } else if let error {
                     self.error?(error)
                 }
             }
         case "Now Playing":
-            manager.getNowPlayingMovies { data, error in
+            manager.getNowPlayingMovies(page: (movie?.page ?? 0) + 1) { data, error in
                 if let data {
-                    self.movies = data.results ?? []
+                    self.movie = data
+                    self.movies.append(contentsOf: data.results ?? [])
                     self.success?()
                 } else if let error {
                     self.error?(error)
@@ -54,6 +64,20 @@ class CategoryMoviesViewModel {
         default:
             self.movies = []
         }
+
+    }
+    
+    func pagination(index: Int) {
+        guard let page = movie?.page else { return }
+        guard let totalPages = movie?.totalPages else {  return }
+        if index == movies.count - 3 && page < totalPages {
+            getMovies()
+        }
+    }
+    
+    func removeItems() {
+        movie = nil
+        movies = []
     }
 }
 

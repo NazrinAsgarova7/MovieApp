@@ -13,7 +13,7 @@ class MoviesOfActorController: BaseController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -56,6 +56,10 @@ class MoviesOfActorController: BaseController {
             print(error)
         }
     }
+    
+    override func configUI() {
+        self.title = vm.actorName
+    }
 }
 
 extension MoviesOfActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -71,5 +75,11 @@ extension MoviesOfActorController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: 168, height: 270)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: vm.items[indexPath.row].id ?? 0)
+        coordinator.start()
     }
 }
