@@ -83,8 +83,11 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
 =======
+=======
+>>>>>>> Stashed changes
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0, actorName: vm.items[indexPath.row].titleLabel))
         navigationController?.config()
 >>>>>>> Stashed changes
