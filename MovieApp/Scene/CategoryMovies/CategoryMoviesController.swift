@@ -94,10 +94,13 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         let controller = MovieDetailController(vm: MovieDetailViewModel(id: vm.movies[indexPath.row].id ?? 0))
         navigationController?.config()
         show(controller, sender: nil)
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -110,6 +113,9 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
         vm.pagination(index: indexPath.row)
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

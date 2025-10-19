@@ -85,8 +85,11 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
