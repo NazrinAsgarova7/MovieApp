@@ -62,11 +62,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.config(homeModel: viewmodel.mainCellItems[indexPath.row])
         cell.callbackSeeAllButton = {
             let controller = CategoryMoviesController(vm: CategoryMoviesViewModel(categoryTitle:             self.viewmodel.mainCellItems[indexPath.row].title))
+            self.navigationController?.config()
             self.show(controller, sender: nil)
         }
         cell.calldidSelectButton = { id in
 <<<<<<< Updated upstream
             let controller = MovieDetailController(vm: MovieDetailViewModel(id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0))
+            self.navigationController?.config()
             self.show(controller, sender: nil)
 =======
             let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)

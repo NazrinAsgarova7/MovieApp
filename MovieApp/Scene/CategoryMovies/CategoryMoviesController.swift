@@ -93,6 +93,7 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
     {
 <<<<<<< Updated upstream
         let controller = MovieDetailController(vm: MovieDetailViewModel(id: vm.movies[indexPath.row].id ?? 0))
+        navigationController?.config()
         show(controller, sender: nil)
 =======
         let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: vm.movies[indexPath.row].id ?? 0)

@@ -3,4 +3,52 @@
    uuid = "E7BF6D7F-3EB7-490C-BBA3-5261D34614E8"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "071784D9-ABBB-479F-8C81-79A178DBD1C3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieApp/Scene/Actor/ActorViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getActors()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "071784D9-ABBB-479F-8C81-79A178DBD1C3 - 963fcbb0c98139d5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieApp.ActorViewModel.getActors() -&gt; ()"
+                  moduleName = "MovieApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nazrinasgarova/Documents/GitHub/MovieApp/MovieApp/Scene/Actor/ActorViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19">
+               </Location>
+               <Location
+                  uuid = "071784D9-ABBB-479F-8C81-79A178DBD1C3 - 81c50f4f5dd2ebaf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;MovieApp.Actor&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; () in MovieApp.ActorViewModel.getActors() -&gt; ()"
+                  moduleName = "MovieApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nazrinasgarova/Documents/GitHub/MovieApp/MovieApp/Scene/Actor/ActorViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
