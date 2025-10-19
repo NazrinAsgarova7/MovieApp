@@ -13,7 +13,7 @@ class ActorController: BaseController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 16
-        layout.sectionInset = .init(top: 0, left: 24, bottom: 0, right: 0)
+        layout.sectionInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.delegate = self
         cv.dataSource = self
@@ -48,6 +48,21 @@ class ActorController: BaseController {
             print(error)
         }
     }
+<<<<<<< Updated upstream
+=======
+    
+    override func configUI() {
+        self.title = "Actors"
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc private func pullToRefresh() {
+        vm.removeAllData()
+        collectionView.reloadData()
+        vm.getActors()
+    }
+>>>>>>> Stashed changes
 }
 
 extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -67,7 +82,12 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
+<<<<<<< Updated upstream
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
+=======
+        let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0, actorName: vm.items[indexPath.row].titleLabel))
+        navigationController?.config()
+>>>>>>> Stashed changes
         show(controller, sender: nil)
     }
 }

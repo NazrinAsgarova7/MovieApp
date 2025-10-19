@@ -46,6 +46,10 @@ class HomeController: BaseController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    override func configUI() {
+        self.title = "Home"
+    }
 }
 
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -61,8 +65,13 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
             self.show(controller, sender: nil)
         }
         cell.calldidSelectButton = { id in
+<<<<<<< Updated upstream
             let controller = MovieDetailController(vm: MovieDetailViewModel(id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0))
             self.show(controller, sender: nil)
+=======
+            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
+            coordinator.start()
+>>>>>>> Stashed changes
         }
         return cell
     }

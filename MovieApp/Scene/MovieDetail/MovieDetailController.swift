@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class MovieDetailController: BaseController {
     private lazy var tableView: UITableView = {
         let tv = UITableView()
@@ -57,6 +56,10 @@ class MovieDetailController: BaseController {
             print(error)
         }
     }
+    
+    override func configUI() {
+        self.title = vm.movieDetail.originalTitle
+    }
 }
 
 extension MovieDetailController: UITableViewDataSource, UITableViewDelegate {
@@ -66,8 +69,11 @@ extension MovieDetailController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailCell") as! MovieDetailCell
+        cell.didSelectCallback = { id in
+            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: id)
+            coordinator.start()
+        }
         cell.configUI(movieDetail: vm.movieDetail, similarMovies: vm.similarMovies)
         return cell
     }
-    
 }
