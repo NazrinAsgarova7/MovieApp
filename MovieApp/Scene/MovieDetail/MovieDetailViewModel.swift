@@ -12,7 +12,7 @@ class MovieDetailViewModel {
     var success: (() -> Void)?
     var error: ((String) -> Void)?
     var movieDetail = MovieDetail()
-    var similarMovies = [SimilarMovieResult]()
+    var similarMovies = [SimilarMovie]()
     var id: Int
     
     init(id: Int) {

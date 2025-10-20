@@ -9,7 +9,7 @@ import Foundation
 
 struct HomeModel {
     var title: String
-    var movies: [MovieResult]
+    var movies: [Movie]
 }
 
 final class HomeViewModel {

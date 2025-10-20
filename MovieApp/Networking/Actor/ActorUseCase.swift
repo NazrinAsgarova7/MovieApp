@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ActorUseCase {
-    func getActors(page: Int, completion: @escaping ((Actor?, String?) -> Void)) 
+    func getActors(page: Int, completion: @escaping ((CoreModel<Actor>?, String?) -> Void)) 
 }

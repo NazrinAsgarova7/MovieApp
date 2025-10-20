@@ -114,7 +114,7 @@ class MovieDetailCell: UITableViewCell {
         return cv
     }()
     
-    private var similarMovies: [SimilarMovieResult]?
+    private var similarMovies: [SimilarMovie]?
     
     var didSelectCallback: ((Int) -> Void)?
     
@@ -188,7 +188,7 @@ class MovieDetailCell: UITableViewCell {
         ])
     }
     
-    func configUI(movieDetail: MovieDetail, similarMovies: [SimilarMovieResult]) {
+    func configUI(movieDetail: MovieDetail, similarMovies: [SimilarMovie]) {
         let imageUrl = NetworkingHelper.shared.configImgURL(endpoint: movieDetail.backdropPath ?? "")
         let image = NetworkingHelper.shared.configImgURL(endpoint: movieDetail.posterPath ?? "")
         backgroundMovieImageView.loadImage(image: imageUrl)

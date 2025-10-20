@@ -11,8 +11,8 @@ final class ActorViewModel {
     let manager = ActorManager()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
-    var items = [ActorResult]()
-    var data: Actor?
+    var items = [Actor]()
+    var data: CoreModel<Actor>?
     
     func getActors() {
         let page = (data?.page ?? 0) + 1

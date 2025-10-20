@@ -7,27 +7,8 @@
 
 import Foundation
 
-// MARK: - Movie
-struct Movie: Codable {
-    let dates: Dates?
-    let page: Int?
-    let results: [MovieResult]?
-    let totalPages, totalResults: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case dates, page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
-
-// MARK: - Dates
-struct Dates: Codable {
-    let maximum, minimum: String?
-}
-
 // MARK: - Result
-struct MovieResult: Codable, TopImageBottomLabelCellProtocol {
+struct Movie: Codable, TopImageBottomLabelCellProtocol {
     let adult: Bool?
     let backdropPath: String?
     let genreIDS: [Int]?

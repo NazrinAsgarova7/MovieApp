@@ -12,7 +12,7 @@ class MovieDetailManager: MovieDetailUseCase {
         NetworkingManager.shared.request(url: endpoint.path, model: MovieDetail.self, completion: completion)
     }
     
-    func getSimilarMovie(endpoint: MovieDetaileEndpoint, completion: @escaping ((SimilarMovie?, String?) -> Void)) {
-        NetworkingManager.shared.request(url: endpoint.path, model: SimilarMovie.self, completion: completion)
+    func getSimilarMovie(endpoint: MovieDetaileEndpoint, completion: @escaping ((CoreModel<SimilarMovie>?, String?) -> Void)) {
+        NetworkingManager.shared.request(url: endpoint.path, model: CoreModel<SimilarMovie>.self, completion: completion)
     }
 }

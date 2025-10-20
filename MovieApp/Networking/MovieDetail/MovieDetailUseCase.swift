@@ -9,5 +9,5 @@ import Foundation
 
 protocol MovieDetailUseCase {
     func getMovieDetail(endpoint: MovieDetaileEndpoint, completion: @escaping ((MovieDetail?, String?) -> Void))
-    func getSimilarMovie(endpoint: MovieDetaileEndpoint, completion: @escaping ((SimilarMovie?, String?) -> Void))
+    func getSimilarMovie(endpoint: MovieDetaileEndpoint, completion: @escaping ((CoreModel<SimilarMovie>?, String?) -> Void))
 }

@@ -39,7 +39,7 @@ class HomeCell: UICollectionViewCell {
         return cv
     }()
     
-    var movies = [MovieResult]()
+    var movies = [Movie]()
     var callbackSeeAllButton: (() -> Void)?
     var calldidSelectButton: ((Int) -> Void)?
 

@@ -7,21 +7,21 @@
 
 import Foundation
 
-// MARK: - SimilarMovie
-struct SimilarMovie: Codable {
-    let page: Int?
-    let results: [SimilarMovieResult]?
-    let totalPages, totalResults: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
+//// MARK: - SimilarMovie
+//struct CoreModel<SimilarMovie>: Codable {
+//    let page: Int?
+//    let results: [SimilarMovieResult]?
+//    let totalPages, totalResults: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case page, results
+//        case totalPages = "total_pages"
+//        case totalResults = "total_results"
+//    }
+//}
 
 // MARK: - Result
-struct SimilarMovieResult: Codable, TopImageBottomLabelCellProtocol {
+struct SimilarMovie: Codable, TopImageBottomLabelCellProtocol {
     
     let adult: Bool?
     let backdropPath: String?

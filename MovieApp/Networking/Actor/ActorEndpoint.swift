@@ -14,7 +14,6 @@ enum ActorEndpoint {
         switch self {
         case .popularActor(page: let id):
             NetworkingHelper.shared.configURL(endpoint: "/person/popular?page=\(id)")
-
         }
     }
 }

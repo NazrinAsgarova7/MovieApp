@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Actor: Codable {
-    let page: Int?
-    let results: [ActorResult]?
-    let totalPages, totalResults: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
+//struct CoreModel<Actor>: Codable {
+//    let page: Int?
+//    let results: [ActorResult]?
+//    let totalPages, totalResults: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case page, results
+//        case totalPages = "total_pages"
+//        case totalResults = "total_results"
+//    }
+//}
 
 // MARK: - Result
-struct ActorResult: Codable, TopImageBottomLabelCellProtocol {
+struct Actor: Codable, TopImageBottomLabelCellProtocol {
     let adult: Bool?
     let gender, id: Int?
     let knownForDepartment, name, originalName: String?

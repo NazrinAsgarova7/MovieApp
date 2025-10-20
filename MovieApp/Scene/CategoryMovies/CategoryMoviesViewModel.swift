@@ -8,8 +8,8 @@
 import Foundation
 
 class CategoryMoviesViewModel {
-    var movie: Movie?
-    var movies = [MovieResult]()
+    var movie: CoreModel<Movie>?
+    var movies = [Movie]()
     private var manager = MoviesOfCategoryManager()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
