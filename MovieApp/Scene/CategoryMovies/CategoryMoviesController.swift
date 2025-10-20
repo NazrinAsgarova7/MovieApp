@@ -91,35 +91,11 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        let controller = MovieDetailController(vm: MovieDetailViewModel(id: vm.movies[indexPath.row].id ?? 0))
-        navigationController?.config()
-        show(controller, sender: nil)
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: vm.movies[indexPath.row].id ?? 0)
         coordinator.start()
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         vm.pagination(index: indexPath.row)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 }

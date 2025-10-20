@@ -21,7 +21,7 @@ class ActorController: BaseController {
         cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
-    
+    let refreshControl = UIRefreshControl()
     let vm = ActorViewModel()
     
     override func viewDidLoad() {
@@ -42,14 +42,13 @@ class ActorController: BaseController {
     override func configVM() {
         vm.getActors()
         vm.success = {
+            self.refreshControl.endRefreshing()
             self.collectionView.reloadData()
         }
         vm.error = { error in
             print(error)
         }
     }
-<<<<<<< Updated upstream
-=======
     
     override func configUI() {
         self.title = "Actors"
@@ -62,7 +61,6 @@ class ActorController: BaseController {
         collectionView.reloadData()
         vm.getActors()
     }
->>>>>>> Stashed changes
 }
 
 extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -82,21 +80,12 @@ extension ActorController: UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0))
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
         let controller = MoviesOfActorController(vm: MoviesOfActorViewModel(id: vm.items[indexPath.row].id ?? 0, actorName: vm.items[indexPath.row].titleLabel))
         navigationController?.config()
->>>>>>> Stashed changes
         show(controller, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        vm.pagination(index: indexPath.row)
     }
 }

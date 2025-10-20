@@ -66,29 +66,8 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
             self.show(controller, sender: nil)
         }
         cell.calldidSelectButton = { id in
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            let controller = MovieDetailController(vm: MovieDetailViewModel(id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0))
-            self.navigationController?.config()
-            self.show(controller, sender: nil)
-=======
             let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
             coordinator.start()
->>>>>>> Stashed changes
-=======
-            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
-            coordinator.start()
->>>>>>> Stashed changes
-=======
-            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
-            coordinator.start()
->>>>>>> Stashed changes
-=======
-            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
-            coordinator.start()
->>>>>>> Stashed changes
         }
         return cell
     }
