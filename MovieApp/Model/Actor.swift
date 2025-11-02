@@ -36,6 +36,10 @@ struct Actor: Codable, TopImageBottomLabelCellProtocol {
         profilePath ?? ""
     }
     
+    var movieId: Int {
+        id ?? 0
+    }
+    
     enum CodingKeys: String, CodingKey {
         case adult, gender, id
         case knownForDepartment = "known_for_department"

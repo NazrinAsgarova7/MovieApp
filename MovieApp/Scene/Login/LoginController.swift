@@ -7,12 +7,12 @@
 
 import UIKit
 
-class LoginController: UIViewController {
+class LoginController: BaseController {
     
     private let emailTextField: UITextField = {
         let t = UITextField()
+        t.layer.cornerRadius = 16
         t.placeholder = "Email"
-        t.isSecureTextEntry = true
         t.layer.borderWidth = 1
         t.layer.borderColor = UIColor.systemGray4.cgColor
         t.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
@@ -39,19 +39,28 @@ class LoginController: UIViewController {
         b.setTitle("Login", for: .normal)
         b.backgroundColor = .systemBlue
         b.setTitleColor(.white, for: .normal)
-        b.layer.cornerRadius = 10
+        b.layer.cornerRadius = 16
         b.translatesAutoresizingMaskIntoConstraints = false
         return b
     }()
     
+    var viewModel: LoginViewModel?
+    
+    init(viewModel: LoginViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configConstraint()
     }
     
-    func configConstraint() {
+    override func configConstraint() {
         [emailTextField, passwordTextField, loginButton].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
@@ -71,4 +80,28 @@ class LoginController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
+    
+    override func configUI() {
+        loginButton.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
+    }
+    
+    @objc func tappedLoginButton() {
+        if let email = emailTextField.text, email != "",
+           let pass = passwordTextField.text, pass != "" {
+            viewModel?.enter(email: email, pass: pass, completion: { viewState in
+                switch viewState {
+                case .error(let error):
+                    self.showAlert(title: error)
+                case .success:
+                    switchToTabbar()
+                }
+            })
+        }
+    }
+}
+
+private func switchToTabbar() {
+    guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+          let delegate = scene.delegate as? SceneDelegate else { return }
+    delegate.tabbarRoot()
 }

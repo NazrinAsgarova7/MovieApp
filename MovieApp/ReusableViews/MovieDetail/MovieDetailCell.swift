@@ -116,7 +116,7 @@ class MovieDetailCell: UITableViewCell {
     
     private var similarMovies: [SimilarMovie]?
     
-    var didSelectCallback: ((Int) -> Void)?
+    var didSelectCallback: ((Int, TopImageBottomLabelCellProtocol) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -223,6 +223,7 @@ extension MovieDetailCell: UICollectionViewDataSource, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        didSelectCallback?(similarMovies?[indexPath.row].id ?? 0)
+        guard let similarMovies else { return }
+        didSelectCallback?(similarMovies[indexPath.row].id ?? 0, similarMovies[indexPath.row])
     }
 }

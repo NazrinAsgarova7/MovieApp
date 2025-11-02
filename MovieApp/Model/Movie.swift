@@ -28,6 +28,10 @@ struct Movie: Codable, TopImageBottomLabelCellProtocol {
         posterPath ?? ""
     }
     
+    var movieId: Int {
+        id ?? 0
+    }
+    
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"

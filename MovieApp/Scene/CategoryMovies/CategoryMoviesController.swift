@@ -91,7 +91,9 @@ extension CategoryMoviesController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: vm.movies[indexPath.row].id ?? 0)
+        let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(),
+                                              //   id: vm.movies[indexPath.row].id ?? 0,
+                                                 movie: vm.movies[indexPath.row])
         coordinator.start()
     }
     

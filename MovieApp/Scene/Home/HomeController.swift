@@ -65,8 +65,10 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate, 
             self.navigationController?.config()
             self.show(controller, sender: nil)
         }
-        cell.calldidSelectButton = { id in
-            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(), id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0)
+        cell.calldidSelectButton = { id, movie in
+            let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(),
+                                                   //  id: self.viewmodel.mainCellItems[indexPath.row].movies[id].id ?? 0,
+                                                     movie: movie)
             coordinator.start()
         }
         return cell

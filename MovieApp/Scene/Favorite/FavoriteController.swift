@@ -1,13 +1,13 @@
 //
-//  MoviesOfActorController.swift
+//  FavoriteController.swift
 //  MovieApp
 //
-//  Created by Nazrin Asgarova on 09.10.25.
+//  Created by Nazrin Asgarova on 30.10.25.
 //
 
 import UIKit
 
-class MoviesOfActorController: BaseController {
+class FavoriteController: BaseController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -22,18 +22,15 @@ class MoviesOfActorController: BaseController {
         return cv
     }()
     
-    let vm: MoviesOfActorViewModel
+    var viewModel = FavoriteViewModel()
     
-    init(vm: MoviesOfActorViewModel) {
-        self.vm = vm
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Favorites"
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.fetchData()
     }
     
     override func configConstraint() {
@@ -48,40 +45,38 @@ class MoviesOfActorController: BaseController {
     }
     
     override func configVM() {
-        vm.getMoviesOfActor()
-        vm.success = {
-            self.collectionView.reloadData()
+        viewModel.completion = { [weak self] viewState in
+            switch viewState {
+            case .error(error: let error):
+                self?.showAlert(title: error)
+            case .success:
+                self?.collectionView.reloadData()
+            }
         }
-        vm.error = { error in
-            print(error)
-        }
-    }
-    
-    override func configUI() {
-        self.title = vm.actorName
     }
 }
 
-extension MoviesOfActorController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension FavoriteController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        vm.items.count
+        viewModel.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopImageBottomLabelCell", for: indexPath) as? TopImageBottomLabelCell else { return UICollectionViewCell() }
-        cell.configure(item: vm.items[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(TopImageBottomLabelCell.self)", for: indexPath) as! TopImageBottomLabelCell
+        cell.configure(item: viewModel.movies[indexPath.row])
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: 168, height: 270)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
-        let coordinator = MovieDetailCoordinator(navigationController: self.navigationController ?? UINavigationController(),
-                                               //  id: vm.items[indexPath.row].id ?? 0,
-                                                 movie: vm.items[indexPath.row])
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let coordinator = MovieDetailCoordinator(
+            navigationController: self.navigationController ?? UINavigationController(),
+                                                 //id: viewModel.movies[indexPath.row].movieId,
+                                                 movie: viewModel.movies[indexPath.row])
         coordinator.start()
     }
 }

@@ -39,9 +39,9 @@ class HomeCell: UICollectionViewCell {
         return cv
     }()
     
-    var movies = [Movie]()
+    var movies = [TopImageBottomLabelCellProtocol]()
     var callbackSeeAllButton: (() -> Void)?
-    var calldidSelectButton: ((Int) -> Void)?
+    var calldidSelectButton: ((Int, TopImageBottomLabelCellProtocol) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,6 +99,6 @@ extension HomeCell: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        calldidSelectButton?(indexPath.row)
+        calldidSelectButton?(indexPath.row, movies[indexPath.row] )
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol TopImageBottomLabelCellProtocol {
+    var movieId: Int { get }
     var titleLabel: String { get }
     var imageUrl: String { get }
 }

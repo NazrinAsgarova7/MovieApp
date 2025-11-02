@@ -14,9 +14,22 @@ class MovieDetailViewModel {
     var movieDetail = MovieDetail()
     var similarMovies = [SimilarMovie]()
     var id: Int
+    var movie: TopImageBottomLabelCellProtocol
+    let favManager = FavoriteManager()
     
-    init(id: Int) {
+    init(id: Int, movie: TopImageBottomLabelCellProtocol) {
         self.id = id
+        self.movie = movie
+    }
+    
+    func addFavorite() {
+        favManager.addToFavorite(movie: movie)
+    }
+    
+    func isFavorite(completion: @escaping ((Bool) -> Void)) {
+        favManager.isFavorite(id: id) { isFav in
+            completion(isFav)
+        }
     }
     
     func getMovieDetail() {
@@ -39,5 +52,9 @@ class MovieDetailViewModel {
                 self.error?(error)
             }
         }
+    }
+    
+    func deleteFavorite() {
+        favManager.deleteFavorite(id: id)
     }
 }

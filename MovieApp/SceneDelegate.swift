@@ -18,7 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = LoginController()
+        if UserDefaults.standard.string(forKey: "userId") != nil {
+            tabbarRoot()
+        } else {
+            window?.rootViewController = LoginController(viewModel: LoginViewModel())
+            window?.makeKeyAndVisible()
+        }
+    }
+    
+    func tabbarRoot() {
+        window?.rootViewController = TabbarController()
         window?.makeKeyAndVisible()
     }
 
